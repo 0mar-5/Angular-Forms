@@ -1,0 +1,26 @@
+<form #formData="ngForm" (ngSubmit)="submitForm(formData)">
+  <h2>Template driven form</h2>
+  <div>
+    <label>Email address</label>
+    <input type="email" ngModel name="email" #email="ngModel"
+      pattern='^[a-zA-Z0-9._%+-]+@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}$' required />
+    <div *ngIf="email.touched && email.errors">
+      <p *ngIf="email.errors['required']">This field is required.</p>
+      <p *ngIf="email.errors['pattern']">This email is not a valid format.</p>
+    </div>
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" ngModel name="password" #password="ngModel" pattern="[a-zA-Z0-9\s!@#$%^&*]{7,10}" required />
+    @if(password.touched && password.errors){
+
+    @if(password.getError('required')){
+    <p>This Field is Required</p>
+    }
+    @if(password.getError('pattern')){
+    <p>password must be (7:10) characters </p>
+    }
+    }
+  </div>
+  <button [disabled]="!formData.valid">Log in</button>
+</form>

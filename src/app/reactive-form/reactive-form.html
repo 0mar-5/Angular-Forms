@@ -1,0 +1,57 @@
+<form [formGroup]="myReactiveForm" (ngSubmit)="formSubmit()">
+  <h2>Reactive form</h2>
+
+  <div>
+    <label>Name</label>
+    <input type="text" formControlName="name" />
+    @if(myReactiveForm.get('name')?.touched && myReactiveForm.get('name')?.errors){
+    @if(myReactiveForm.get('name')?.getError('required')){
+    <p>This Field is Required</p>
+    } @if(myReactiveForm.get('name')?.getError('minlength')){
+    <p>This Field should be more than 4 letters</p>
+    } }
+  </div>
+  <div>
+    <label>Email</label>
+    <input type="email" formControlName="email" />
+    @if(myReactiveForm.get('email')?.touched && myReactiveForm.get('email')?.errors){
+    @if(myReactiveForm.get('email')?.getError('required')){
+    <p>This Field is Required</p>
+    } @if(myReactiveForm.get('email')?.getError('pattern')){
+    <p>Email is not valid</p>
+    } }
+  </div>
+  <div>
+    <label>User Name</label>
+    <input type="text" formControlName="userName" />
+    @if(myReactiveForm.get('userName')?.touched && myReactiveForm.get('userName')?.errors){
+    @if(myReactiveForm.get('userName')?.getError('required')){
+    <p>This Field is Required</p>
+    } @if(myReactiveForm.get('userName')?.getError('minlength')){
+    <p>user name must br at lest 8 char</p>
+    } }
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" formControlName="password" />
+    @if(myReactiveForm.get('password')?.touched && myReactiveForm.get('password')?.errors){
+    @if(myReactiveForm.get('password')?.getError('required')){
+    <p>This Field is Required</p>
+    } @if(myReactiveForm.get('password')?.getError('pattern')){
+    <p>must have lowercase,uppercase,digit,special char and (8:10) char</p>
+    } }
+  </div>
+  <div>
+    <label>Conferm Password</label>
+    <input type="password" formControlName="confermPassword" />
+    @if(myReactiveForm.get('confermPassword')?.touched && myReactiveForm.get('confermPassword')?.errors){
+    @if(myReactiveForm.get('confermPassword')?.getError('required')){
+    <p>This Field is Required</p>
+    }
+    @if(myReactiveForm.get('confermPassword')?.getError('passwordMismatch')){
+    <p>Passwords do not match</p>
+    }
+    }
+  </div>
+  <button [disabled]="!myReactiveForm.valid">Register</button>
+</form>
